@@ -6,6 +6,13 @@
     name: sudo
     state: present
 
+# bugfix due to ansible-error
+- name: Install acl
+  ansible.builtin.apt:
+    name: acl
+    state: present
+
+
 - name: Add user
   ansible.builtin.user:
     name: "{{ aeciduser_name }}"
