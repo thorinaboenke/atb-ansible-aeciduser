@@ -39,4 +39,3 @@
 - name: Set keyboard layout to German
   ansible.builtin.command: |
     localectl set-keymap de
-  when: ansible_os_family == "Linux"
