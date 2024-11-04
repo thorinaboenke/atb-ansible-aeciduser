@@ -1,0 +1,3 @@
+handlers:
+  - name: Reconfigure keyboard
+    ansible.builtin.command: setupcon

@@ -35,7 +35,9 @@
     state: present
     key:  "{{ aeciduser_key }}"
 
-# Task to set the keyboard layout to German
-- name: Set keyboard layout to German
-  ansible.builtin.command: |
-    localectl set-keymap de
+- name: Set keyboard layout to German in /etc/default/keyboard
+  ansible.builtin.lineinfile:
+    path: /etc/default/keyboard
+    regexp: '^XKBLAYOUT='
+    line: 'XKBLAYOUT="de"'
+  notify: Reconfigure keyboard
