@@ -35,9 +35,21 @@
     state: present
     key:  "{{ aeciduser_key }}"
 
+- name: install keyboard-configuration
+  become: yes
+  apt:
+    name:
+      - keyboard-configuration
+      - console-setup
+    state: present
+  when: ansible_os_family == 'Debian'
+
 - name: Set keyboard layout to German in /etc/default/keyboard
+  become: yes
   ansible.builtin.lineinfile:
     path: /etc/default/keyboard
     regexp: '^XKBLAYOUT='
     line: 'XKBLAYOUT="de"'
-  notify: Reconfigure keyboard
+  notify:
+    - dpkg-reconfigure keyboard-configuration
+ 
